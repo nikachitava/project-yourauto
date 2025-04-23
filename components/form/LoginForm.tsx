@@ -8,6 +8,8 @@ import { Form } from "@/components/ui/form";
 import Link from "next/link";
 import CustomFormField from "../Custom/CustomFormField";
 import { LoginSchema } from "@/schemas/LoginSchema";
+import { useActionState } from "react";
+import { LoginAction } from "@/actions/LoginAction";
 
 const LoginForm = () => {
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -18,10 +20,18 @@ const LoginForm = () => {
         },
     });
 
+    const [state, formAction, isPending] = useActionState(
+        LoginAction,
+        undefined
+    );
+
     return (
         <div>
             <Form {...form}>
-                <form className="space-y-8 max-w-3xl mx-auto py-10">
+                <form
+                    action={formAction}
+                    className="space-y-8 max-w-3xl mx-auto py-10"
+                >
                     <CustomFormField
                         control={form.control}
                         name="email"
@@ -44,11 +54,16 @@ const LoginForm = () => {
                     >
                         I don't have an account
                     </Link>
+                    {state?.error && (
+                        <div className="text-status-error text-sm mt-2">
+                            {state?.error}
+                        </div>
+                    )}
                     <Button
                         type="submit"
                         className="w-full cursor-pointer mt-2"
                     >
-                        LOGIN
+                        {isPending ? "Loading..." : "Login"}
                     </Button>
                 </form>
             </Form>
