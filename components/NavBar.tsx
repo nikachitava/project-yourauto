@@ -1,10 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import { ModeToggle } from "./ToggleDarkMode";
 import Link from "next/link";
+import { User } from "@supabase/supabase-js";
+import { Button } from "./ui/button";
+import { logout } from "@/actions/LogOutAction";
 
-const NavBar = () => {
+const NavBar = ({ userData }: { userData: User | null }) => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -15,6 +18,8 @@ const NavBar = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    const [state, logOutAction, isPending] = useActionState(logout, undefined);
 
     return (
         <header
@@ -31,7 +36,24 @@ const NavBar = () => {
                 </h1>
                 <nav className="flex items-center space-x-4">
                     <Link href={"/"}>Home</Link>
-                    <Link href={"/auth/login"}>Login</Link>
+                    {userData ? (
+                        <>
+                            <Link href={"/profile"}>Profile</Link>
+                            <form action={logOutAction}>
+                                <Button
+                                    type="submit"
+                                    variant={"outline"}
+                                    size="sm"
+                                    className="cursor-pointer"
+                                    disabled={isPending}
+                                >
+                                    {isPending ? "Logging out..." : "Logout"}
+                                </Button>
+                            </form>
+                        </>
+                    ) : (
+                        <Link href={"/auth/login"}>Login</Link>
+                    )}
                     <ModeToggle />
                 </nav>
             </div>
