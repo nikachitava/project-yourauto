@@ -2,9 +2,8 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
     return (
-        <div>
-            <h1 className="font-poppins">HOME PAGE</h1>
+        <main className="flex min-h-screen">
             <Button>Click me</Button>
-        </div>
+        </main>
     );
 }
