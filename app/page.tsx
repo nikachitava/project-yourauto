@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
+import FilterMenu from "@/components/FilterMenu";
 
 export default function Home() {
     return (
         <main className="flex min-h-screen">
-            <Button>Click me</Button>
+            <FilterMenu />
         </main>
     );
 }
