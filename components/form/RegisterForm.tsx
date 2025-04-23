@@ -4,29 +4,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import Link from "next/link";
 import CustomFormField from "../Custom/CustomFormField";
-
-const formSchema = z
-    .object({
-        email: z.string().min(1),
-        password: z.string().min(1),
-        confirmPassword: z.string().min(1),
-    })
-    .refine((data) => data.password === data.confirmPassword, {});
+import { RegisterSchema } from "@/schemas/RegisterSchema";
 
 const RegisterForm = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof RegisterSchema>>({
+        resolver: zodResolver(RegisterSchema),
         defaultValues: {
             email: "",
             password: "",
