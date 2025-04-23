@@ -8,21 +8,54 @@ import { Form } from "@/components/ui/form";
 import Link from "next/link";
 import CustomFormField from "../Custom/CustomFormField";
 import { RegisterSchema } from "@/schemas/RegisterSchema";
+import { useActionState } from "react";
+import { SignUpAction } from "@/actions/SignUpAction";
 
 const RegisterForm = () => {
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
+            name: "",
+            surname: "",
+            phone: "",
             email: "",
             password: "",
             confirmPassword: "",
         },
     });
 
+    const [state, formAction, isPending] = useActionState(
+        SignUpAction,
+        undefined
+    );
+
     return (
         <div>
             <Form {...form}>
-                <form className="space-y-8 max-w-3xl mx-auto py-10">
+                <form
+                    action={formAction}
+                    className="space-y-8 max-w-3xl mx-auto py-10"
+                >
+                    <CustomFormField
+                        control={form.control}
+                        name="name"
+                        label="Name"
+                        type="text"
+                        placeholder="John"
+                    />
+                    <CustomFormField
+                        control={form.control}
+                        name="surname"
+                        label="Surname"
+                        type="text"
+                        placeholder="Doe"
+                    />
+                    <CustomFormField
+                        control={form.control}
+                        name="phone"
+                        label="Phone number"
+                        placeholder="+1234567890"
+                    />
                     <CustomFormField
                         control={form.control}
                         name="email"
@@ -52,11 +85,16 @@ const RegisterForm = () => {
                     >
                         I already have an account
                     </Link>
+                    {state?.error && (
+                        <div className="text-status-error text-sm mt-2">
+                            {state?.error}
+                        </div>
+                    )}
                     <Button
                         type="submit"
                         className="w-full cursor-pointer mt-2"
                     >
-                        REGISTER
+                        {isPending ? "Loading..." : "Register"}
                     </Button>
                 </form>
             </Form>
