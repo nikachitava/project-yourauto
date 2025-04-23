@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import FilterMenuItem from "./FilterMenuItem";
 import { vehicleBrands } from "@/data/vehicleBrands";
@@ -17,15 +19,24 @@ const FilterMenu = () => {
                 />
                 <FilterMenuItem
                     name="Year"
-                    options={["2020", "2021", "2022"]}
+                    isInputValue
+                    onValueChange={(min, max) => {
+                        console.log("Selected price range:", min, max);
+                    }}
                 />
                 <FilterMenuItem
                     name="Price"
-                    options={["1000", "2000", "3000"]}
+                    isInputValue
+                    onValueChange={(min, max) => {
+                        console.log("Selected price range:", min, max);
+                    }}
                 />
                 <FilterMenuItem
                     name="Mileage"
-                    options={["1000", "2000", "3000"]}
+                    isInputValue
+                    onValueChange={(min, max) => {
+                        console.log("Selected price range:", min, max);
+                    }}
                 />
                 <FilterMenuItem
                     name="Color"
