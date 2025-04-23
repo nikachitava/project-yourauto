@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <footer className="container mx-auto flex justify-between items-center px-4 py-3 bg-background-secondary border-t border-border py-6">
+        <footer className="container mx-auto flex justify-between items-center px-4 bg-background-secondary border-t border-border py-6">
             <div className="text-muted-foreground text-sm">
                 © {new Date().getFullYear()} yourAuto. All rights reserved.
             </div>
