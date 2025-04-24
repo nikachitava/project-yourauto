@@ -2,23 +2,24 @@
 
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import { FaArrowUp } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa";
 import { Button } from "./ui/button";
 
-interface IFilterMenuItemProps {
+interface IFilterMenuItemProps<T extends { id: string; name: string }> {
     name: string;
-    options?: string[];
+    options?: T[];
     isInputValue?: boolean;
     onValueChange?: (min: string, max: string) => void;
+    onOptionSelect?: (selected: T) => void;
 }
 
-const FilterMenuItem: React.FC<IFilterMenuItemProps> = ({
+const FilterMenuItem = <T extends { id: string; name: string }>({
     name,
     options,
     isInputValue,
     onValueChange,
-}) => {
+    onOptionSelect,
+}: IFilterMenuItemProps<T>) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [choosenOption, setChoosenOption] = useState<string>("");
     const menuRef = useRef<HTMLDivElement>(null);
@@ -28,8 +29,9 @@ const FilterMenuItem: React.FC<IFilterMenuItemProps> = ({
 
     const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
 
-    const choosenOptionHandler = (option: string) => {
-        setChoosenOption(option);
+    const choosenOptionHandler = (option: T) => {
+        setChoosenOption(option.name);
+        onOptionSelect?.(option);
         setIsMenuOpen(false);
     };
 
@@ -56,7 +58,11 @@ const FilterMenuItem: React.FC<IFilterMenuItemProps> = ({
                 className="w-full flex items-center justify-between cursor-pointer border p-2 rounded-md"
             >
                 <span>{choosenOption ? choosenOption : name}</span>
-                {isMenuOpen ? <FaArrowUp /> : <FaArrowDown />}
+                <FaArrowDown
+                    className={`transition-transform duration-300 ${
+                        isMenuOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                />
             </div>
 
             {isMenuOpen && (
@@ -129,15 +135,15 @@ const FilterMenuItem: React.FC<IFilterMenuItemProps> = ({
                             </div>
                         ) : (
                             <div className="flex flex-col h-[200px] overflow-auto">
-                                {options?.map((brand) => (
+                                {options?.map((option) => (
                                     <div
                                         onClick={() =>
-                                            choosenOptionHandler(brand)
+                                            choosenOptionHandler(option)
                                         }
-                                        key={brand}
+                                        key={option.id}
                                         className="flex items-center gap-2 p-2 cursor-pointer hover:bg-gray-100/20 rounded-lg"
                                     >
-                                        <span>{brand}</span>
+                                        <span>{option.name}</span>
                                     </div>
                                 ))}
                             </div>

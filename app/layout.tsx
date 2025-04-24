@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import { FilterMenuProvder } from "@/context/FilterMenuProvider";
 
 const poppins = Poppins({
     variable: "--font-poppins",
@@ -38,7 +39,9 @@ export default async function RootLayout({
                     disableTransitionOnChange
                 >
                     <NavBar userData={user} />
-                    <div className="pt-20">{children}</div>
+                    <FilterMenuProvder>
+                        <div className="pt-20">{children}</div>
+                    </FilterMenuProvder>
                     <Footer />
                 </ThemeProvider>
             </body>

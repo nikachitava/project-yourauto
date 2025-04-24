@@ -1,6 +1,6 @@
 import FilterMenu from "@/components/FilterMenu";
 
-export default function Home() {
+export default async function Home() {
     return (
         <main className="flex min-h-screen">
             <FilterMenu />
