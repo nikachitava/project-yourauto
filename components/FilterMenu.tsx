@@ -3,6 +3,7 @@
 import React from "react";
 import FilterMenuItem from "./FilterMenuItem";
 import { vehicleBrands } from "@/data/vehicleBrands";
+import SelectedFilters from "./SelectedFilters";
 
 const FilterMenu = () => {
     return (
@@ -43,6 +44,7 @@ const FilterMenu = () => {
                     options={["Red", "Blue", "Green"]}
                 />
             </div>
+            <SelectedFilters />
         </div>
     );
 };
