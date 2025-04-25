@@ -1,12 +1,13 @@
 import { createClient } from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { NextApiRequest, NextApiResponse } from "next";
 
-export async function handler(req: NextApiRequest, res: NextApiResponse) 
-{
+export async function GET(
+    request: Request,
+    { params }: { params: { brandId: string } }
+) {
     try {
-        const brandId = req.query.brandId as string;
+        const brandId = params.brandId;
 
         if (!brandId) {
             return NextResponse.json(
