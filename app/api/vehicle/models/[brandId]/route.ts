@@ -4,11 +4,17 @@ import { cookies } from "next/headers";
 
 export async function GET(
     request: Request,
-    { params }: { params: { brandId: string } }
+    context: any
 ) {
     try {
-        const { searchParams } = new URL(request.url);
-        const brandId = params.brandId;
+        const {params} = context
+        const brandId = params.brandId as string;
+        if (!brandId || brandId.length === 0) { 
+            return NextResponse.json(
+                { error: "Brand ID is required" },
+                { status: 400 }
+            );
+        }
 
         if (!brandId) {
             return NextResponse.json(
