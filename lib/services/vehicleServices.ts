@@ -1,4 +1,22 @@
+import { IVehicle } from "@/types/IVehicle";
 import { IBrand, IFuelType, IModel } from "@/types/VehicleDataTypes";
+
+export const fetchAllVehicles = async (): Promise<IVehicle[]> => {
+    try {
+        const response = await fetch("/api/vehicle/allvehicle/");
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error fetching vehicles:", errorData);
+            return [];
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching vehicles:", error);
+        return [];
+    }
+};
 
 export const fetchBrands = async (): Promise<IBrand[]> => {
     try {
