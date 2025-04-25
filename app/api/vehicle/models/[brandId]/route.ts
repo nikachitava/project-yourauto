@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) 
+export async function handler(req: NextApiRequest, res: NextApiResponse) 
 {
     try {
         const brandId = req.query.brandId as string;
