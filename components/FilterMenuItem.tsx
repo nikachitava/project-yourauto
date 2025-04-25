@@ -21,7 +21,6 @@ const FilterMenuItem = <T extends { id: string; name: string }>({
     onOptionSelect,
 }: IFilterMenuItemProps<T>) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [choosenOption, setChoosenOption] = useState<string>("");
     const menuRef = useRef<HTMLDivElement>(null);
 
     const [minValue, setMinValue] = useState("");
@@ -30,7 +29,6 @@ const FilterMenuItem = <T extends { id: string; name: string }>({
     const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
 
     const choosenOptionHandler = (option: T) => {
-        setChoosenOption(option.name);
         onOptionSelect?.(option);
         setIsMenuOpen(false);
     };
@@ -57,7 +55,7 @@ const FilterMenuItem = <T extends { id: string; name: string }>({
                 onClick={handleToggleMenu}
                 className="w-full flex items-center justify-between cursor-pointer border p-2 rounded-md"
             >
-                <span>{choosenOption ? choosenOption : name}</span>
+                <span>{name}</span>
                 <FaArrowDown
                     className={`transition-transform duration-300 ${
                         isMenuOpen ? "rotate-180" : "rotate-0"
@@ -110,7 +108,6 @@ const FilterMenuItem = <T extends { id: string; name: string }>({
                                         onClick={() => {
                                             setMinValue("");
                                             setMaxValue("");
-                                            setChoosenOption("");
                                         }}
                                         variant="link"
                                         className="text-sm text-gray-500 hover:underline"
@@ -119,11 +116,6 @@ const FilterMenuItem = <T extends { id: string; name: string }>({
                                     </Button>
                                     <Button
                                         onClick={() => {
-                                            setChoosenOption(
-                                                `${minValue || "0"} - ${
-                                                    maxValue || "∞"
-                                                }`
-                                            );
                                             onValueChange?.(minValue, maxValue);
                                             setIsMenuOpen(false);
                                         }}
