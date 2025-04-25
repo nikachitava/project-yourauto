@@ -38,8 +38,18 @@ const SelectedFilters = () => {
     const formattedPrice = formatPrice(price);
     const formattedYear = formatYear(year);
 
+    const isSelected =
+        selectedModel ||
+        selectedBrand ||
+        selectedFuel ||
+        status ||
+        formattedYear ||
+        formattedPrice;
+
+    if (!isSelected) return null;
+
     return (
-        <div className="flex items-center gap-4 border-y border-gray-300 py-4 mt-8">
+        <div className="flex items-center gap-4 border-y border-gray-300 py-4 mt-8 transition-all duration-300 ease-in-out">
             {selectedBrand && (
                 <SelectedFilterItem
                     name={selectedBrand?.name}
@@ -70,12 +80,7 @@ const SelectedFilters = () => {
             {status && (
                 <SelectedFilterItem name={status} onClick={clearStatus} />
             )}
-            {(selectedModel ||
-                selectedBrand ||
-                selectedFuel ||
-                status ||
-                formattedYear ||
-                formattedPrice) && (
+            {isSelected && (
                 <SelectedFilterItem name="Clear Filter" onClick={clearAll} />
             )}
         </div>
