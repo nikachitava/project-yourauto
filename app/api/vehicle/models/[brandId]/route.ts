@@ -7,6 +7,7 @@ export async function GET(
     { params }: { params: { brandId: string } }
 ) {
     try {
+        const { searchParams } = new URL(request.url);
         const brandId = params.brandId;
 
         if (!brandId) {
