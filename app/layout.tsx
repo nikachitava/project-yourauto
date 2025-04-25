@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/theme-provider";
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
-import { FilterMenuProvder } from "@/context/FilterMenuProvider";
 
 const poppins = Poppins({
     variable: "--font-poppins",
@@ -23,27 +17,10 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const supabase = createClient(cookies());
-    const {
-        data: { user },
-        error,
-    } = await supabase.auth.getUser();
-
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${poppins.variable} antialiased`}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    <NavBar userData={user} />
-                    <FilterMenuProvder>
-                        <div className="pt-20">{children}</div>
-                    </FilterMenuProvder>
-                    <Footer />
-                </ThemeProvider>
+                {children}
             </body>
         </html>
     );
