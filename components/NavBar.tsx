@@ -30,10 +30,12 @@ const NavBar = ({ userData }: { userData: User | null }) => {
             }`}
         >
             <div className="container mx-auto flex justify-between items-center px-4 py-3">
-                <h1 className="font-poppins text-2xl md:text-3xl font-semibold">
-                    <span className="text-muted-foreground">your</span>
-                    <span className="text-foreground">Auto</span>
-                </h1>
+                <Link href={"/"} className="text-2xl font-bold">
+                    <h1 className="font-poppins text-2xl md:text-3xl font-semibold">
+                        <span className="text-muted-foreground">your</span>
+                        <span className="text-foreground">Auto</span>
+                    </h1>
+                </Link>
                 <nav className="flex items-center space-x-4">
                     <Link href={"/"}>Home</Link>
                     {userData ? (
