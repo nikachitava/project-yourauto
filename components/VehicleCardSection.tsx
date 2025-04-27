@@ -19,22 +19,34 @@ const VehicleCardSection = () => {
         getVehicles();
     }, []);
 
-    if (loading) return <div className="p-4">Loading vehicles...</div>;
+    if (loading)
+        return (
+            <div className="p-8 text-center text-lg">Loading vehicles...</div>
+        );
 
     return (
-        <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-            {vehicles.map((v) => (
-                <VehicleCard
-                    key={v.id}
-                    city={v.city}
-                    country={v.country}
-                    cover_image={v.cover_image}
-                    id={v.id}
-                    price={v.price}
-                    title={v.title}
-                    year={v.year}
-                />
-            ))}
+        <div className="container mx-auto mt-8 px-4 sm:px-8">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
+                Available Vehicles
+            </h1>
+
+            <div className="flex flex-col gap-10">
+                {vehicles.map((v) => (
+                    <VehicleCard
+                        key={v.id}
+                        id={v.id}
+                        city={v.city}
+                        country={v.country}
+                        cover_image={v.cover_image}
+                        title={v.title}
+                        year={v.year}
+                        price={v.price}
+                        mileage={v.mileage}
+                        fuel_type={v.fuel_type}
+                        transmission={v.transmission}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
