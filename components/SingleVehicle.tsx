@@ -17,6 +17,7 @@ import {
 import Image from "next/image";
 import { IVehicle } from "@/types/IVehicle";
 import { createClient } from "@/utils/supabase/client";
+import Loader from "./Loader";
 
 const SingleVehicle = ({ vehicleId }: { vehicleId: string }) => {
     console.log("Vehicle ID:", vehicleId);
@@ -112,16 +113,7 @@ const SingleVehicle = ({ vehicleId }: { vehicleId: string }) => {
     }, [showPreview]);
 
     if (isLoading) {
-        return (
-            <div className="container mx-auto px-4 py-8 flex justify-center items-center min-h-[50vh]">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto"></div>
-                    <p className="mt-4 text-muted-foreground">
-                        Loading vehicle details...
-                    </p>
-                </div>
-            </div>
-        );
+        return <Loader text="Loading vehicle data..." />;
     }
 
     // Show error state

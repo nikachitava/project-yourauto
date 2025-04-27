@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { fetchAllVehicles } from "@/lib/services/vehicleServices";
 import { IVehicle } from "@/types/IVehicle";
 import VehicleCard from "@/components/VehicleCard";
+import Loader from "./Loader";
 
 const VehicleCardSection = () => {
     const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -19,10 +20,7 @@ const VehicleCardSection = () => {
         getVehicles();
     }, []);
 
-    if (loading)
-        return (
-            <div className="p-8 text-center text-lg">Loading vehicles...</div>
-        );
+    if (loading) return <Loader text="Loading vehicles..." />;
 
     return (
         <div className="container mx-auto mt-8 px-4 sm:px-8">
