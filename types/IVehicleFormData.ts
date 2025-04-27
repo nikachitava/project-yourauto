@@ -18,9 +18,8 @@ export interface VehicleFormData {
     country: string;
     city: string;
     address: string;
-    cover_image: string;
-    gallery: string[];
+    cover_image: File; 
+    gallery: File[];  
     description: string;
     contact_number: string;
-    status: string;
 }

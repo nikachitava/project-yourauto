@@ -23,11 +23,10 @@ export const vehicleFormSchema = z.object({
     country: z.string().min(1, "Country is required"),
     city: z.string().min(1, "City is required"),
     address: z.string().min(1, "Address is required"),
-    cover_image: z.string().url("Please provide a valid image URL"),
-    gallery: z.array(z.string().url("Please provide valid image URLs")),
+    cover_image: z.instanceof(File).refine(file => file.size > 0, "Cover image is required"),
+    gallery: z.array(z.instanceof(File)).min(1, "At least one gallery image is required"),
     description: z
         .string()
         .min(10, "Description must be at least 10 characters"),
     contact_number: z.string().min(1, "Contact number is required"),
-    status: z.string().min(1, "Please select status"),
 });
