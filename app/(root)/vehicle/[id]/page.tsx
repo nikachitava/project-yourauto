@@ -62,8 +62,6 @@ const SingleVehiclePage: React.FC<ISingleVehiclePageProps> = async ({
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1>Test: {id}</h1>
-            {/* Title and Price */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-bold text-foreground">
@@ -83,7 +81,6 @@ const SingleVehiclePage: React.FC<ISingleVehiclePageProps> = async ({
                 </div>
             </div>
 
-            {/* Main Image */}
             <div className="mt-6 overflow-hidden rounded-xl">
                 <div className="relative w-full h-64 sm:h-96">
                     <Image
@@ -96,7 +93,6 @@ const SingleVehiclePage: React.FC<ISingleVehiclePageProps> = async ({
                 </div>
             </div>
 
-            {/* Gallery */}
             {fakeVehicle.gallery.length > 0 && (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-6">
                     {fakeVehicle.gallery.map((img, index) => (
@@ -115,7 +111,6 @@ const SingleVehiclePage: React.FC<ISingleVehiclePageProps> = async ({
                 </div>
             )}
 
-            {/* Vehicle Details */}
             <div className="mt-10">
                 <h2 className="text-2xl font-bold mb-4 text-foreground">
                     Vehicle Details
@@ -184,7 +179,6 @@ const SingleVehiclePage: React.FC<ISingleVehiclePageProps> = async ({
                 </div>
             </div>
 
-            {/* Description */}
             <div className="mt-10">
                 <h2 className="text-2xl font-bold mb-4 text-foreground">
                     Description
@@ -194,7 +188,6 @@ const SingleVehiclePage: React.FC<ISingleVehiclePageProps> = async ({
                 </p>
             </div>
 
-            {/* Contact Section */}
             <div className="mt-10 p-6 bg-card border border-border rounded-lg shadow-sm">
                 <h2 className="text-xl font-bold text-foreground mb-4">
                     Contact Seller
@@ -210,7 +203,6 @@ const SingleVehiclePage: React.FC<ISingleVehiclePageProps> = async ({
 
 export default SingleVehiclePage;
 
-// Helper component for details
 const DetailItem = ({
     icon,
     label,
