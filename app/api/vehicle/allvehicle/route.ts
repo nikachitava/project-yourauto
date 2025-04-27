@@ -9,7 +9,7 @@ export async function GET() {
 
         const { data, error: error } = await supabase
         .from("vehicles")
-        .select("*");
+        .select("*").order("created_at", { ascending: false });
 
         if (error) {
             console.error("Error fetching brands:", error);
