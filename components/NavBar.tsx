@@ -41,6 +41,7 @@ const NavBar = ({ userData }: { userData: User | null }) => {
                     {userData ? (
                         <>
                             <Link href={"/profile"}>Profile</Link>
+                            <Link href={"/create"}>Add Listing</Link>
                             <form action={logOutAction}>
                                 <Button
                                     type="submit"
