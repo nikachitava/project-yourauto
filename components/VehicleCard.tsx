@@ -28,7 +28,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
     transmission,
 }) => {
     return (
-        <Link href={`/vehicles/${id}`} className="group">
+        <Link href={`/vehicle/${id}`} className="group">
             <div className="flex flex-col sm:flex-row overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
                 {/* Image Section */}
                 <div className="relative w-full sm:w-1/3 h-60 sm:h-48 overflow-hidden">
