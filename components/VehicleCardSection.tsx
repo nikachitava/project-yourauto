@@ -23,7 +23,7 @@ const VehicleCardSection = () => {
     if (loading) return <Loader text="Loading vehicles..." />;
 
     return (
-        <div className="container mx-auto my-12 px-4 sm:px-8">
+        <div className="container mx-auto my-40 px-4 sm:px-8">
             <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
                 Available Vehicles
             </h1>
