@@ -11,6 +11,8 @@ interface IFilterMenuItemProps<T extends { id: string; name: string }> {
     isInputValue?: boolean;
     onValueChange?: (min: string, max: string) => void;
     onOptionSelect?: (selected: T) => void;
+    disabled?: boolean;
+    disabledText?: string;
 }
 
 const FilterMenuItem = <T extends { id: string; name: string }>({
@@ -19,6 +21,8 @@ const FilterMenuItem = <T extends { id: string; name: string }>({
     isInputValue,
     onValueChange,
     onOptionSelect,
+    disabled = false,
+    disabledText,
 }: IFilterMenuItemProps<T>) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -26,7 +30,10 @@ const FilterMenuItem = <T extends { id: string; name: string }>({
     const [minValue, setMinValue] = useState("");
     const [maxValue, setMaxValue] = useState("");
 
-    const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
+    const handleToggleMenu = () => {
+        if (disabled) return;
+        setIsMenuOpen((prev) => !prev);
+    };
 
     const choosenOptionHandler = (option: T) => {
         onOptionSelect?.(option);
@@ -53,16 +60,27 @@ const FilterMenuItem = <T extends { id: string; name: string }>({
         <div ref={menuRef} className="relative w-full md:max-w-[450px]">
             <div
                 onClick={handleToggleMenu}
-                className="w-full flex items-center justify-between cursor-pointer border p-2 rounded-md"
+                className={`group w-full flex flex-col items-start border p-2 rounded-md relative ${
+                    disabled
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer"
+                }`}
             >
-                <span>{name}</span>
-                <FaArrowDown
-                    className={`transition-transform duration-300 ${
-                        isMenuOpen ? "rotate-180" : "rotate-0"
-                    }`}
-                />
-            </div>
+                <div className="w-full flex items-center justify-between">
+                    <span>{name}</span>
+                    <FaArrowDown
+                        className={`transition-transform duration-300 ${
+                            isMenuOpen ? "rotate-180" : "rotate-0"
+                        }`}
+                    />
+                </div>
 
+                {disabled && disabledText && (
+                    <p className="absolute left-2 bottom-full text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {disabledText}
+                    </p>
+                )}
+            </div>
             {isMenuOpen && (
                 <div className="absolute top-full left-0 w-full z-10 bg-background rounded-md shadow-lg mt-2">
                     <div className="flex flex-col border p-2 rounded-md h-auto">

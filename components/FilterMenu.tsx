@@ -82,6 +82,8 @@ const FilterMenu = () => {
                     onOptionSelect={(model) => {
                         setSelectedModel(model);
                     }}
+                    disabled={!selectedBrand}
+                    disabledText="Please select a brand first"
                 />
                 <FilterMenuItem
                     name="Status"
