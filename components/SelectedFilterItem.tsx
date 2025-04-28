@@ -11,7 +11,7 @@ const SelectedFilterItem: React.FC<ISelectedFilterItem> = ({
     onClick,
 }) => {
     return (
-        <div className="bg-accent flex items-center gap-4 px-3 py-1 rounded-full text-white shadow-md shadow-accent/50">
+        <div className="bg-accent flex items-center gap-4 px-3 py-1 rounded-full text-white shadow-md shadow-accent/50 cursor-pointer">
             <span className="text-white text-sm font-semibold text-center">
                 {name}
             </span>
