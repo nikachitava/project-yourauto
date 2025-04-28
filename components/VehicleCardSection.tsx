@@ -23,12 +23,12 @@ const VehicleCardSection = () => {
     if (loading) return <Loader text="Loading vehicles..." />;
 
     return (
-        <div className="container mx-auto mt-8 px-4 sm:px-8">
+        <div className="container mx-auto my-12 px-4 sm:px-8">
             <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
                 Available Vehicles
             </h1>
 
-            <div className="flex flex-col gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {vehicles.map((v) => (
                     <VehicleCard
                         key={v.id}
