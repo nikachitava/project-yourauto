@@ -27,5 +27,9 @@ export interface IVehicle {
     created_at: string;
     updated_at: string;
     model_id: string;
+    vehicle_brands?: {
+      name: string;
+    };
   }
+
   
